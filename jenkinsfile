@@ -4,11 +4,11 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01/tree/main/terraform'
+                git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01'
             }
         }
         stage('Terraform init') {
-            steps {:
+            steps {
                 sh 'terraform init'
             }
         }
@@ -18,15 +18,10 @@ pipeline {
                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
-        stage('Terraform apply ') {
+        stage('Terraform apply') {
             steps {
-                
-                 
-                        sh 'terraform --auto-approve'
-                     
-                }
+                sh 'terraform apply --auto-approve'
             }
         }
-
     }
-
+}
