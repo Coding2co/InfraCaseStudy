@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Starting Checkout...'
-                git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01'
+                git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01.git'
                 echo 'Checkout completed.'
             }
         }
