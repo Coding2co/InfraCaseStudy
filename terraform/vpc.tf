@@ -118,6 +118,14 @@ resource "aws_instance" "ec2_instance"{
    Name = "EC2Instance-Batch1"
   }
  )
+  user_data = <<-EOF
+              #!/bin/bash
+              mkdir -p /home/ec2-user/.ssh
+              echo "${var.ansible_public_key}" > /home/ec2-user/.ssh/authorized_keys
+              chown -R ec2-user:ec2-user /home/ec2-user/.ssh
+              chmod 700 /home/ec2-user/.ssh
+              chmod 600 /home/ec2-user/.ssh/authorized_keys
+              EOF
 
  root_block_device {
     encrypted   = true
