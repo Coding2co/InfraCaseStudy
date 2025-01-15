@@ -6,6 +6,17 @@ variable "default_region"{
  default = "eu-west-1"
 }
 
+variable "aws_access_key" {
+  description = "AWS access key"
+  type        = string
+  default     = ""
+}
+
+variable "aws_secret_key" {
+  description = "AWS secret key"
+  type        = string
+  default     = ""
+}
 #VPC
 
 variable "vpc_cidr" {
@@ -150,7 +161,7 @@ variable "profile_name" {
 variable "jenkins_key" {
   description = "Key-Value pair stored in Jenkins"
   type 	      = string
-  
+  value       = "Case_Study_Batch_1"
   #Value is passed dynamically in Jenkins
 }
 
