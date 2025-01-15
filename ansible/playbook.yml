@@ -1,0 +1,39 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Update package lists
+      yum:
+        update_cache: yes
+      register: yum_update_result
+
+    - name: Installing Apache Web Server
+      yum:
+        name: httpd
+        state: present
+      register: httpd_install_result
+
+    - name: Start Apache service
+      service:
+        name: httpd
+        state: started
+      register: httpd_start_result
+
+    - name: Gather Apache version
+      command: httpd -v
+      register: httpd_version_result
+
+    - name: Set facts
+      set_fact:
+        yum_update_status: "{{ yum_update_result.changed }}"
+        apache_install_status: "{{ httpd_install_result.changed }}"
+        apache_start_status: "{{ httpd_start_result.changed }}"
+        apache_version: "{{ httpd_version_result.stdout }}"
+
+
+    - name: Debug facts 
+      debug:
+        msg: "apt_update_status: {{ yum_update_status }}"
+        msg: "apache_install_status: {{ apache_install_status }}"
+        msg: "apache_start_status: {{ apache_start_status }}"
+        msg: "apache_version: {{ apache_version }}"

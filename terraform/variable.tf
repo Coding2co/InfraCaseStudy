@@ -102,7 +102,7 @@ variable "protocol" {
 variable "my_ip" {
   description = "ssh allowed ip address"
   type        = string
-  default     = "---"
+  default     = "34.253.173.41"
 }
 
 
@@ -126,7 +126,7 @@ variable "all_traffic_protocol" {
 variable "ami_id" {
  description = "Image id of the EC2Instance"
  type        = string
- default     = "----"
+ default     = "ami-0d2c558eac94f7"
 }
 
 variable "instance_type" {
@@ -150,7 +150,8 @@ variable "profile_name" {
 variable "jenkins_key" {
   description = "Key-Value pair stored in Jenkins"
   type 	      = string
-  default     = "-----"
+  
+  #Value is passed dynamically in Jenkins
 }
 
 
