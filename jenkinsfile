@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01/tree/main/terraform'
+            }
+        }
+        stage('Terraform init') {
+            steps {:
+                sh 'terraform init'
+            }
+        }
+        stage('Plan') {
+            steps {
+                sh 'terraform plan -out tfplan'
+                sh 'terraform show -no-color tfplan > tfplan.txt'
+            }
+        }
+        stage('Terraform apply ') {
+            steps {
+                
+                 
+                        sh 'terraform --auto-approve'
+                     
+                }
+            }
+        }
+
+    }
+
