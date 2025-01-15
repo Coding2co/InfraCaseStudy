@@ -22,8 +22,11 @@ pipeline {
                 dir("${TERRAFORM_DIR}") {
                     echo "Running Terraform commands..."
                     sh 'terraform init'
-                    sh 'terraform plan'
-                    sh 'terraform apply -auto-approve'
+                    sh 'terraform validate '
+                    sh """
+                            terraform apply -auto-approve \
+                            -var "ansible_public_key=${env.ANSIBLE_PUBLIC_KEY}"
+                        """
                 }
             }
         }

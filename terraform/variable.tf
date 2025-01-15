@@ -165,6 +165,12 @@ variable "jenkins_key" {
   #Value is passed dynamically in Jenkins
 }
 
+variable "ansible_public_key" {
+ description   = "ssh public key to set ssh trust"
+ type          = string
+ default        = ""
+}
+
 
 
 
