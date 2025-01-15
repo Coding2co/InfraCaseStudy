@@ -4,23 +4,37 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                echo 'Starting Checkout...'
                 git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01'
+                echo 'Checkout completed.'
             }
         }
         stage('Terraform init') {
             steps {
-                sh 'terraform init'
+                echo 'Starting Terraform init...'
+                dir('Terraform') {
+                    sh 'terraform init'
+                }
+                echo 'Terraform init completed.'
             }
         }
         stage('Plan') {
             steps {
-                sh 'terraform plan -out tfplan'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                echo 'Starting Terraform plan...'
+                dir('Terraform') {
+                    sh 'terraform plan -out tfplan'
+                    sh 'terraform show -no-color tfplan > tfplan.txt'
+                }
+                echo 'Terraform plan completed.'
             }
         }
         stage('Terraform apply') {
             steps {
-                sh 'terraform apply --auto-approve'
+                echo 'Starting Terraform apply...'
+                dir('Terraform') {
+                    sh 'terraform apply --auto-approve'
+                }
+                echo 'Terraform apply completed.'
             }
         }
     }
