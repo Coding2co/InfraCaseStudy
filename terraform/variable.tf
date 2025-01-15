@@ -11,7 +11,7 @@ variable "default_region"{
 variable "vpc_cidr" {
  description = "Casestudy batch-1 VPC cidr block"
  type = string
- default = "10.0.1.0/16"
+ default = "10.0.0.0/16"
 }
 
 variable "dns_support" {
@@ -42,7 +42,7 @@ variable "tags" {
 variable "subnet_cidr" {
  description = "Casestudy batch-1 subnet cidr block"
  type = string
- default = "10.0.1.0/24"
+ default = "10.0.0.0/24"
  }
 
 #Route Table
@@ -71,8 +71,8 @@ variable "sg_des" {
 
 variable "all_traffic_cidr" {
   description = "allowing all traffic from anywhere"
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+  type        =  string
+  default     = "0.0.0.0/0"
 }
 
 variable "https_port" {
@@ -102,7 +102,7 @@ variable "protocol" {
 variable "my_ip" {
   description = "ssh allowed ip address"
   type        = string
-  default     = "34.253.173.41"
+  default     = "34.253.173.41/32"
 }
 
 
@@ -126,7 +126,7 @@ variable "all_traffic_protocol" {
 variable "ami_id" {
  description = "Image id of the EC2Instance"
  type        = string
- default     = "ami-0d2c558eac94f7"
+ default     = "ami-03a2d27e0fcf0d9f3"
 }
 
 variable "instance_type" {
