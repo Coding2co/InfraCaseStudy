@@ -1,14 +1,22 @@
 pipeline {
     agent any
 
+
+ environment {
+        GIT_REPO_URL = 'https://github.com/Anup-maurya/CaseStudyBatch01.git'
+        GIT_BRANCH = 'main'
+    }
+
     stages {
-        stage('Checkout') {
+        stage('Checkout Code') {
             steps {
                 echo 'Starting Checkout...'
-                git branch: 'main', url: 'https://github.com/Anup-maurya/CaseStudyBatch01.git'
-                echo 'Checkout completed.'
+                git url: "${GIT_REPO_URL}", branch: "${GIT_BRANCH}"
+                echo 'Starting Completed'
             }
         }
+    }
+
         stage('Terraform init') {
             steps {
                 echo 'Starting Terraform init...'
