@@ -106,8 +106,6 @@ resource "aws_vpc_security_group_ingress_rule" "allow_ssh" {
 resource "aws_vpc_security_group_egress_rule" "all_traffic" {
  security_group_id = aws_security_group.acn_sg.id
  cidr_ipv4         = var.all_traffic_cidr
- from_port         = var.port_zero
- to_port           = var.port_zero
  ip_protocol       = var.all_traffic_protocol
 }
 
@@ -120,7 +118,7 @@ resource "aws_instance" "ec2_instance"{
  vpc_security_group_ids = [aws_security_group.acn_sg.id]
  monitoring             = var.instance_monitor_status
  key_name               = var.ssh_key
- iam_instance_profile   = var.profile_name
+#iam_instance_profile   = var.profile_name
  associate_public_ip_address = true
  tags   = merge(
    var.tags,

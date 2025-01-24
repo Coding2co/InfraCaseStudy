@@ -112,13 +112,13 @@ variable "my_ip" {
 
 
 #Outbound rules
-
+/*
 variable "port_zero" {
  description = "allowing all traffic"
  type        = number
  default     = 0
 }
-
+*/
 variable "all_traffic_protocol" {
  description = "allowing all traffic protocol"
  type        = string
@@ -145,13 +145,13 @@ variable "instance_monitor_status" {
  type        = bool
  default     = true
 }
-
+/*
 variable "profile_name" {
   description = "EC2Instance CaseStudy profile"
   type        = string
-  default     = "EC2FullAccessCaseStudy_Profile"
+  default     = "EC2_Role"
 }
-
+*/
 variable "ssh_key" {
   description = "Key-Value pair stored in Jenkins"
   type 	      = string
