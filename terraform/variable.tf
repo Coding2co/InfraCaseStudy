@@ -1,22 +1,11 @@
 #Provider
 
-variable "default_region"{
+variable "default_region" {
  description = "AWS region of the resources"
  type = string
- default = "eu-west-1"
+ default = "us-east-1"
 }
 
-variable "aws_access_key" {
-  description = "AWS access key"
-  type        = string
-  default     = ""
-}
-
-variable "aws_secret_key" {
-  description = "AWS secret key"
-  type        = string
-  default     = ""
-}
 #VPC
 
 variable "vpc_cidr" {
@@ -56,6 +45,11 @@ variable "subnet_cidr" {
  default = "10.0.0.0/24"
  }
 
+variable "avail_zone" {
+ description = "Availability Zone"
+ type        = string
+ default     = "us-east-1b"
+}
 #Route Table
 
 variable "rtb_cidr" {
@@ -113,7 +107,7 @@ variable "protocol" {
 variable "my_ip" {
   description = "ssh allowed ip address"
   type        = string
-  default     = "34.253.173.41/32"
+  default     = "0.0.0.0/0"
 }
 
 
@@ -137,7 +131,7 @@ variable "all_traffic_protocol" {
 variable "ami_id" {
  description = "Image id of the EC2Instance"
  type        = string
- default     = "ami-03a2d27e0fcf0d9f3"
+ default     = "ami-0df8c184d5f6ae949"
 }
 
 variable "instance_type" {
@@ -158,17 +152,10 @@ variable "profile_name" {
   default     = "EC2FullAccessCaseStudy_Profile"
 }
 
-variable "jenkins_key" {
+variable "ssh_key" {
   description = "Key-Value pair stored in Jenkins"
   type 	      = string
-  default       = "Case_Study_Batch_1"
-  #Value is passed dynamically in Jenkins
-}
-
-variable "ansible_public_key" {
- description   = "ssh public key to set ssh trust"
- type          = string
- default        = ""
+  default       = "demoserver"   #Change to your key-value pair name
 }
 
 

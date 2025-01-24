@@ -1,32 +1,39 @@
 pipeline {
-    agent any 
-    
+    agent any
+
     environment {
-        GIT_REPO_URL = 'https://github.com/Anup-maurya/CaseStudyBatch01.git'
-        GIT_BRANCH = 'main'
-        TERRAFORM_DIR = 'terraform'
-        AWS_ACCESS_KEY_ID     = credentials('Access_key_Id')
-        AWS_SECRET_ACCESS_KEY = credentials('Secret_access_key')
-        AWS_DEFAULT_REGION    = 'eu-west-1'
+        ANSIBLE_DIR        = 'ansible'
+        INVENTORY_PATH     = './aws_ec2.yaml'
+        TERRAFORM_DIR      = 'terraform'
+        AWS_DEFAULT_REGION = 'us-east-1'
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                git url: "${GIT_REPO_URL}", branch: "${GIT_BRANCH}"
-            }
-        }
-
         stage('Terraform') {
             steps {
                 dir("${TERRAFORM_DIR}") {
                     echo "Running Terraform commands..."
                     sh 'terraform init'
-                    sh 'terraform validate '
-                    sh """
-                            terraform apply -auto-approve \
-                            -var "ansible_public_key=${env.ANSIBLE_PUBLIC_KEY}"
+                    sh 'terraform validate'
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+
+        stage('Ansible') {
+            steps {
+                dir("${ANSIBLE_DIR}") {
+                    echo "Running Ansible Playbooks..."
+                    sh 'ansible-inventory -i "${INVENTORY_PATH}" --graph'
+                    echo "Installing Apache Server on EC2 Instance"
+                    withCredentials([file(credentialsId: 'node_private_key', variable: 'PRIVATE_KEY_PATH')]) {
+                        sh """
+                            ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
+                            --user ec2-user \
+                            --private-key \$PRIVATE_KEY_PATH \
+                            --limit target
                         """
+                    }
                 }
             }
         }
@@ -37,10 +44,7 @@ pipeline {
             echo 'Pipeline completed successfully.'
         }
         failure {
-            echo 'Pipeline failed.'
-        }
-        always {
-            echo 'This will always run, whether the build is successful or not.'
+            echo 'Pipeline failed with Error.'
         }
     }
 }
