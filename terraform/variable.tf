@@ -155,7 +155,7 @@ variable "profile_name" {
 variable "ssh_key" {
   description = "Key-Value pair stored in Jenkins"
   type 	      = string
-  default       = "demoserver"   #Change to your key-value pair name
+  default     = "demoserver"   #Change to your key-value pair name
 }
 
 
