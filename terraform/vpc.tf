@@ -56,7 +56,12 @@ resource "aws_route_table" "acn_rtb"{
   cidr_block = var.rtb_cidr
   gateway_id = aws_internet_gateway.acn_igw.id
   }
-}
+ tags = merge(
+   vars.tags,
+    {
+    Name = "Routetable-Batch-1"
+    }   
+  }
 
 #Associations
 
@@ -117,6 +122,7 @@ resource "aws_instance" "ec2_instance"{
  subnet_id              = aws_subnet.acn_subnet.id
  vpc_security_group_ids = [aws_security_group.acn_sg.id]
  monitoring             = var.instance_monitor_status
+ ebs_optimized          = true
  key_name               = var.ssh_key
 #iam_instance_profile   = var.profile_name
  associate_public_ip_address = true
