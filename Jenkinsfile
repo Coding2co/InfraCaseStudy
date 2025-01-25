@@ -28,7 +28,7 @@ pipeline {
                     echo "Installing Apache Server on EC2 Instance"
                     withCredentials([file(credentialsId: 'node_private_key', variable: 'PRIVATE_KEY_PATH')]) {
                         sh """
-                            ansible-playbook -i "${INVENTORY_PATH}" playbook.yml \
+                            ansible-playbook -i ${INVENTORY_PATH} playbook.yml \
                             --user ec2-user \
                             --private-key \$PRIVATE_KEY_PATH \
                             --limit target
