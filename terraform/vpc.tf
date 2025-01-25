@@ -57,11 +57,13 @@ resource "aws_route_table" "acn_rtb"{
   gateway_id = aws_internet_gateway.acn_igw.id
   }
  tags = merge(
-   vars.tags,
+   var.tags,
     {
     Name = "Routetable-Batch-1"
-    }   
+  
   }
+ )   
+}
 
 #Associations
 
