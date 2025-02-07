@@ -38,6 +38,6 @@ all_traffic_protocol = "-1"
 ami_id                  = "ami-0df8c184d5f6ae949" #change to your desired AMI-Id
 instance_type           = "t2.micro"
 instance_monitor_status = "true"
-ssh_key                 = "demosever"             #change to your keyvalue pair name.
+ssh_key                 = "demoserver"             #change to your keyvalue pair name.
 
 
